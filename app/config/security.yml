@@ -33,11 +33,11 @@ security:
             security: false
 
         # FOSOAuthServerBundle
-        api:
-            pattern:   ^/api
-            fos_oauth: true
-            stateless: true
-            anonymous: false # can be omitted as its default value
+#        api:
+#            pattern:   ^/api
+#            fos_oauth: true
+#            stateless: true
+#            anonymous: false # can be omitted as its default value
 
         # FOSOAuthServerBundle
         secure_area:
@@ -81,4 +81,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
+        # - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
