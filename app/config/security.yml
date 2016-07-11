@@ -17,6 +17,41 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        # FOSOAuthServerBundle
+        oauth_authorize:
+            pattern:  ^/oauth/v2/auth
+            # add your favorite authentication process here
+            form_login:
+                provider:   fos_userbundle
+                check_path: /oauth/v2/auth/login_check
+                login_path: /oauth/v2/auth/login
+            anonymous: true
+
+        # FOSOAuthServerBundle
+        oauth_token:
+            pattern:  ^/oauth/v2/token
+            security: false
+
+        # FOSOAuthServerBundle
+        api:
+            pattern:   ^/api
+            fos_oauth: true
+            stateless: true
+            anonymous: false # can be omitted as its default value
+
+        # FOSOAuthServerBundle
+        secure_area:
+            pattern:    ^/
+            fos_oauth: true
+            form_login:
+                provider:   fos_userbundle
+                check_path: /login
+                login_path: /login_check
+            logout:
+                path:   /logout
+                target: /
+            anonymous: ~
+
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -46,3 +81,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }

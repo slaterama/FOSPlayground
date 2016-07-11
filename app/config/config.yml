@@ -81,3 +81,13 @@ fos_user:
     from_email:
         address: donotreply@codepunk.com
         sender_name: Codepunk
+
+# FOSOAuthServerBundle Configuration
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        ApiBundle\Entity\Client
+    access_token_class:  ApiBundle\Entity\AccessToken
+    refresh_token_class: ApiBundle\Entity\RefreshToken
+    auth_code_class:     ApiBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
